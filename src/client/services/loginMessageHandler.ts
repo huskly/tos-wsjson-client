@@ -51,9 +51,7 @@ export type LoginResponse = {
   successful: boolean;
 };
 
-export default class LoginMessageHandler
-  implements WebSocketApiMessageHandler<string>
-{
+export default class LoginMessageHandler implements WebSocketApiMessageHandler<string> {
   parseResponse(message: RawPayloadResponse): LoginResponse {
     const [{ body }] = message.payload;
     const { authenticationStatus } = body as RawLoginResponseBody;

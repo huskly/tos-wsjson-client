@@ -25,9 +25,7 @@ export type ChartRequestParams = {
   includeExtendedHours: boolean;
 };
 
-export default class ChartMessageHandler
-  implements WebSocketApiMessageHandler<ChartRequestParams>
-{
+export default class ChartMessageHandler implements WebSocketApiMessageHandler<ChartRequestParams> {
   buildRequest({
     symbol,
     timeAggregation,

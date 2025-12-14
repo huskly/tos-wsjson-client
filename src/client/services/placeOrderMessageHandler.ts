@@ -79,9 +79,7 @@ export type PlaceOrderSnapshotResponse = {
   service: "place_order";
 };
 
-export default class PlaceOrderMessageHandler
-  implements WebSocketApiMessageHandler<PlaceLimitOrderRequestParams>
-{
+export default class PlaceOrderMessageHandler implements WebSocketApiMessageHandler<PlaceLimitOrderRequestParams> {
   // quantity > 0 => buy
   // quantity < 0 => sell
   buildRequest({

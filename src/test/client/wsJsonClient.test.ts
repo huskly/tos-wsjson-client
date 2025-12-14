@@ -84,13 +84,10 @@ const fakeLoginResponse = {
   ],
 };
 
-class FakeMessageHandler
-  implements
-    WebSocketApiMessageHandler<
-      string,
-      { service: "fake"; result: number } | null
-    >
-{
+class FakeMessageHandler implements WebSocketApiMessageHandler<
+  string,
+  { service: "fake"; result: number } | null
+> {
   buildRequest(value: string): RawPayloadRequest {
     return newPayload({
       header: { service: "fake", id: "fake", ver: 0 },
@@ -99,7 +96,7 @@ class FakeMessageHandler
   }
 
   parseResponse(
-    message: RawPayloadResponse
+    message: RawPayloadResponse,
   ): { service: "fake"; result: number } | null {
     const [{ body }] = message.payload as any;
     return { service: "fake", result: body.someMagicNumber };
@@ -125,7 +122,7 @@ describe("wsJsonClientTest", () => {
       await expect(server).toReceiveMessage(CONNECTION_REQUEST_MESSAGE);
       const loginMessageHandler = new LoginMessageHandler();
       await expect(server).toReceiveMessage(
-        loginMessageHandler.buildRequest(accessToken)
+        loginMessageHandler.buildRequest(accessToken),
       );
       expect(client.isConnected()).toBeTruthy();
     } finally {
@@ -151,7 +148,7 @@ describe("wsJsonClientTest", () => {
     const server = new WS(url, { jsonProtocol: true });
     const fakeMessageHandler = new FakeMessageHandler();
     const responseParser = new ResponseParser(
-      new GenericIncomingMessageHandler()
+      new GenericIncomingMessageHandler(),
     );
     const webSocket = new WebSocket(url);
     const client = new RealWsJsonClient(webSocket, responseParser);
@@ -164,7 +161,7 @@ describe("wsJsonClientTest", () => {
       await expect(server).toReceiveMessage(CONNECTION_REQUEST_MESSAGE);
       const loginMessageHandler = new LoginMessageHandler();
       await expect(server).toReceiveMessage(
-        loginMessageHandler.buildRequest(accessToken)
+        loginMessageHandler.buildRequest(accessToken),
       );
       const observable = client.dispatch(fakeMessageHandler, "wowowow");
       await expect(server).toReceiveMessage(fakeRequest);

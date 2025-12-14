@@ -34,9 +34,7 @@ type RawSchwabLoginResponseBody = {
   };
 };
 
-export default class SchwabLoginMessageHandler
-  implements WebSocketApiMessageHandler<string>
-{
+export default class SchwabLoginMessageHandler implements WebSocketApiMessageHandler<string> {
   parseResponse(message: RawPayloadResponse): SchwabLoginResponse {
     const [{ body }] = message.payload;
     const {

@@ -27,9 +27,7 @@ export type GetWatchlistPatchResponse = {
 
 export type GetWatchlistResponse = GetWatchlistSnapshotResponse;
 
-export default class GetWatchlistMessageHandler
-  implements WebSocketApiMessageHandler<number>
-{
+export default class GetWatchlistMessageHandler implements WebSocketApiMessageHandler<number> {
   buildRequest(watchlistId: number): RawPayloadRequest {
     return newPayload({
       header: {

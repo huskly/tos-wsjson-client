@@ -9,9 +9,9 @@ export const DEFAULT_ALERT_TYPES = [
   "MULTIPLE_EXPIRED_ALERTS",
 ];
 
-export default class SubscribeToAlertMessageHandler
-  implements WebSocketApiMessageHandler<string[]>
-{
+export default class SubscribeToAlertMessageHandler implements WebSocketApiMessageHandler<
+  string[]
+> {
   buildRequest(alertTypes: string[] = DEFAULT_ALERT_TYPES): RawPayloadRequest {
     return {
       payload: [

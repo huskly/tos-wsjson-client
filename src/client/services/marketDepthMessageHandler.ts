@@ -22,9 +22,7 @@ export type MarketDepthResponse = {
   bidQuotes: MarketDepthQuote[];
 };
 
-export default class MarketDepthMessageHandler
-  implements WebSocketApiMessageHandler<string>
-{
+export default class MarketDepthMessageHandler implements WebSocketApiMessageHandler<string> {
   buildRequest(symbol: string): RawPayloadRequest {
     return newPayload({
       header: {

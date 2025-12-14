@@ -23,9 +23,7 @@ export type RawOptionSeriesResponse = {
   series: OptionSeriesItem[];
 };
 
-export default class OptionSeriesMessageHandler
-  implements WebSocketApiMessageHandler<string>
-{
+export default class OptionSeriesMessageHandler implements WebSocketApiMessageHandler<string> {
   buildRequest(symbol: string): RawPayloadRequest {
     const id = newRandomId();
     return {

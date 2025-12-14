@@ -2,8 +2,8 @@ export declare type DeepPartial<T> = {
   [P in keyof T]?: T[P] extends (infer U)[]
     ? DeepPartial<U>[]
     : T[P] extends readonly (infer X)[]
-    ? readonly DeepPartial<X>[]
-    : DeepPartial<T[P]>;
+      ? readonly DeepPartial<X>[]
+      : DeepPartial<T[P]>;
 };
 
 export function throwError(msg: string): never {
@@ -30,21 +30,21 @@ export type Constructor<T> = new (...args: any[]) => T;
 // Filters the array to only elements of the specified type.
 export function ofType<TElements, TFilter extends TElements>(
   array: TElements[],
-  filterType: Constructor<TFilter>
+  filterType: Constructor<TFilter>,
 ): TFilter[] {
   return array.filter((e): e is TFilter => e instanceof filterType);
 }
 
 export function findByType<TElements, TFilter extends TElements>(
   array: TElements[],
-  filterType: Constructor<TFilter>
+  filterType: Constructor<TFilter>,
 ): TFilter | undefined {
   return array.find((e): e is TFilter => e instanceof filterType);
 }
 
 export function findByTypeOrThrow<TElements, TFilter extends TElements>(
   array: TElements[],
-  filterType: Constructor<TFilter>
+  filterType: Constructor<TFilter>,
 ): TFilter {
   return (
     findByType(array, filterType) ??

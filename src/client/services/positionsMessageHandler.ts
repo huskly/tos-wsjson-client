@@ -56,9 +56,7 @@ export interface Instrument {
   underlyingLastPrice?: number;
 }
 
-export default class PositionsMessageHandler
-  implements WebSocketApiMessageHandler<string>
-{
+export default class PositionsMessageHandler implements WebSocketApiMessageHandler<string> {
   buildRequest(accountNumber: string): RawPayloadRequest {
     return newPayload({
       header: { service: "positions", ver: 0, id: "positions" },

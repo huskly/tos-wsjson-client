@@ -30,9 +30,7 @@ export type OptionQuotesRequestParams = {
   maxStrike: number;
 };
 
-export default class OptionQuotesMessageHandler
-  implements WebSocketApiMessageHandler<OptionQuotesRequestParams>
-{
+export default class OptionQuotesMessageHandler implements WebSocketApiMessageHandler<OptionQuotesRequestParams> {
   buildRequest({
     underlyingSymbol,
     seriesNames,

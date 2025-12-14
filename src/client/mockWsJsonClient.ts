@@ -10,7 +10,7 @@ import { WsJsonClient } from "./wsJsonClient.js";
 
 export default class MockWsJsonClient implements WsJsonClient {
   authenticateWithAuthCode(
-    _authCode: string
+    _authCode: string,
   ): Promise<RawLoginResponseBody | null> {
     throw new Error("Method not implemented.");
   }
@@ -88,7 +88,7 @@ export default class MockWsJsonClient implements WsJsonClient {
   }
 
   optionChainDetails(
-    _: OptionChainDetailsRequest
+    _: OptionChainDetailsRequest,
   ): Promise<ParsedPayloadResponse> {
     return Promise.resolve({
       service: "option_chain/get",
@@ -104,7 +104,7 @@ export default class MockWsJsonClient implements WsJsonClient {
   }
 
   async *optionQuotes(
-    _: OptionQuotesRequestParams
+    _: OptionQuotesRequestParams,
   ): AsyncIterable<ParsedPayloadResponse> {
     return yield {
       service: "quotes/options",
@@ -127,7 +127,7 @@ export default class MockWsJsonClient implements WsJsonClient {
   }
 
   replaceOrder(
-    _: Required<PlaceLimitOrderRequestParams>
+    _: Required<PlaceLimitOrderRequestParams>,
   ): Promise<ParsedPayloadResponse> {
     return Promise.resolve({
       service: "order_events",

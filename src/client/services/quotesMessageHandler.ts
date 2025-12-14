@@ -37,9 +37,9 @@ export type RawPayloadResponseQuotesSnapshot = {
   items: RawPayloadResponseQuotesItem[];
 };
 
-export default class QuotesMessageHandler
-  implements WebSocketApiMessageHandler<string[]>
-{
+export default class QuotesMessageHandler implements WebSocketApiMessageHandler<
+  string[]
+> {
   buildRequest(symbols: string[]): RawPayloadRequest {
     return newPayload({
       header: { service: "quotes", id: "generalQuotes", ver: 0 },

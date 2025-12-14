@@ -14,13 +14,13 @@ export async function getAuthCode(username: string, password: string) {
 
     const page = await browser.newPage();
     await page.setUserAgent(
-      "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36"
+      "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36",
     );
     await page.setViewport({ width: 800, height: 650 });
     await page.setRequestInterception(true);
 
     console.log(
-      "Please log in manually. The script will watch for the final redirect URL."
+      "Please log in manually. The script will watch for the final redirect URL.",
     );
 
     let oauthCode = null;
@@ -49,7 +49,7 @@ export async function getAuthCode(username: string, password: string) {
     await new Promise((resolve) => setTimeout(resolve, randomDelay(2, 4)));
     let frames = page.frames();
     let targetFrame = frames.find((frame) =>
-      frame.url().includes("sws-gateway-nr.thinkorswim.com")
+      frame.url().includes("sws-gateway-nr.thinkorswim.com"),
     );
     if (!targetFrame) {
       throw new Error("Target frame not found");
@@ -69,7 +69,7 @@ export async function getAuthCode(username: string, password: string) {
     await new Promise((resolve) => setTimeout(resolve, randomDelay(2, 4)));
     frames = page.frames();
     targetFrame = frames.find((frame) =>
-      frame.url().includes("sws-gateway-nr.thinkorswim.com")
+      frame.url().includes("sws-gateway-nr.thinkorswim.com"),
     );
     if (!targetFrame) {
       throw new Error("Target frame not found");

@@ -9,7 +9,7 @@ import { ParsedPayloadResponse } from "./tdaWsJsonTypes.js";
 
 export interface WsJsonClient extends Disposable {
   authenticateWithAuthCode(
-    authCode: string
+    authCode: string,
   ): Promise<RawLoginResponseBody | null>;
 
   authenticateWithAccessToken(args: {
@@ -38,25 +38,25 @@ export interface WsJsonClient extends Disposable {
   optionChainQuotes(symbol: string): AsyncIterable<ParsedPayloadResponse>;
 
   optionChainDetails(
-    request: OptionChainDetailsRequest
+    request: OptionChainDetailsRequest,
   ): Promise<ParsedPayloadResponse>;
 
   optionQuotes(
-    request: OptionQuotesRequestParams
+    request: OptionQuotesRequestParams,
   ): AsyncIterable<ParsedPayloadResponse>;
 
   placeOrder(
-    request: PlaceLimitOrderRequestParams
+    request: PlaceLimitOrderRequestParams,
   ): Promise<ParsedPayloadResponse>;
 
   replaceOrder(
-    request: Required<PlaceLimitOrderRequestParams>
+    request: Required<PlaceLimitOrderRequestParams>,
   ): Promise<ParsedPayloadResponse>;
 
   workingOrders(accountNumber: string): AsyncIterable<ParsedPayloadResponse>;
 
   createAlert(
-    request: CreateAlertRequestParams
+    request: CreateAlertRequestParams,
   ): Promise<ParsedPayloadResponse>;
 
   cancelAlert(alertId: number): Promise<ParsedPayloadResponse>;

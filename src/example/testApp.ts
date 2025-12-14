@@ -164,7 +164,7 @@ async function run() {
     storeTokenInDotEnvFile(client.accessToken!, client.refreshToken!);
   } else {
     throw new Error(
-      "TOS_ACCESS_TOKEN or TOS_USERNAME and TOS_PASSWORD env vars must be set"
+      "TOS_ACCESS_TOKEN or TOS_USERNAME and TOS_PASSWORD env vars must be set",
     );
   }
   const app = new TestApp(client);
@@ -188,7 +188,7 @@ function storeTokenInDotEnvFile(accessToken: string, refreshToken: string) {
       .filter(
         (line) =>
           !line.startsWith("TOS_ACCESS_TOKEN=") &&
-          !line.startsWith("TOS_REFRESH_TOKEN=")
+          !line.startsWith("TOS_REFRESH_TOKEN="),
       )
       .join("\n");
   }

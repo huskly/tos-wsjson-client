@@ -6,9 +6,7 @@ import WebSocketApiMessageHandler, {
 } from "./webSocketApiMessageHandler.js";
 
 // Submit new order or update existing order. Provide a `refOrderId` to update an existing order.
-export default class SubmitOrderMessageHandler
-  implements WebSocketApiMessageHandler<PlaceLimitOrderRequestParams>
-{
+export default class SubmitOrderMessageHandler implements WebSocketApiMessageHandler<PlaceLimitOrderRequestParams> {
   buildRequest({
     accountNumber,
     limitPrice,

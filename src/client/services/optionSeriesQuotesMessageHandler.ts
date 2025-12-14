@@ -16,9 +16,7 @@ export type OptionSeriesQuotesSnapshotResponse = {
   series: OptionSeriesQuote[];
 };
 
-export default class OptionSeriesQuotesMessageHandler
-  implements WebSocketApiMessageHandler<string>
-{
+export default class OptionSeriesQuotesMessageHandler implements WebSocketApiMessageHandler<string> {
   buildRequest(symbol: string): RawPayloadRequest {
     return newPayload({
       header: {

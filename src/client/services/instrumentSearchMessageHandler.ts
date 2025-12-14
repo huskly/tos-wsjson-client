@@ -18,9 +18,7 @@ type InstrumentSearchRequest = {
   limit?: number;
 };
 
-export default class InstrumentSearchMessageHandler
-  implements WebSocketApiMessageHandler<InstrumentSearchRequest>
-{
+export default class InstrumentSearchMessageHandler implements WebSocketApiMessageHandler<InstrumentSearchRequest> {
   buildRequest({
     query,
     limit = 5,

@@ -20,7 +20,7 @@ export default class WsJsonServerProxy implements Disposable {
 
   constructor(
     private readonly downstream: ws,
-    private readonly wsJsonClientFactory: () => WsJsonClient
+    private readonly wsJsonClientFactory: () => WsJsonClient,
   ) {
     downstream.on("error", console.error);
     downstream.on("message", (data: string) => this.onClientMessage(data));
@@ -84,7 +84,7 @@ export default class WsJsonServerProxy implements Disposable {
   private async relayIterable({ request, args }: ProxiedRequest) {
     const upstream = this.ensureConnected();
     for await (const response of upstream[request](
-      args as never
+      args as never,
     ) as AsyncIterable<any>) {
       this.proxyResponse({ request, args, response });
     }

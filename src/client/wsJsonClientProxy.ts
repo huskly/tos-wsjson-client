@@ -62,11 +62,11 @@ export class WsJsonClientProxy implements WsJsonClient {
 
   constructor(
     private readonly proxyUrl: string,
-    private readonly options?: any
+    private readonly options?: any,
   ) {}
 
   authenticateWithAuthCode(
-    authCode: string
+    authCode: string,
   ): Promise<RawLoginResponseBody | null> {
     return this.authenticate("authenticateWithAuthCode", authCode);
   }
@@ -80,7 +80,7 @@ export class WsJsonClientProxy implements WsJsonClient {
 
   private authenticate(
     method: "authenticateWithAuthCode" | "authenticateWithAccessToken",
-    args: string | { accessToken: string; refreshToken: string }
+    args: string | { accessToken: string; refreshToken: string },
   ): Promise<RawLoginResponseBody | null> {
     this.socket = new WebSocket(this.proxyUrl, this.options);
     this.state = ChannelState.CONNECTING;
@@ -120,31 +120,31 @@ export class WsJsonClientProxy implements WsJsonClient {
 
   private doAuthenticate(
     method: "authenticateWithAuthCode" | "authenticateWithAccessToken",
-    args: string | { accessToken: string; refreshToken: string }
+    args: string | { accessToken: string; refreshToken: string },
   ): Promise<RawLoginResponseBody | null> {
     return this.dispatch<RawLoginResponseBody | null>(method, args).promise();
   }
 
   accountPositions(
-    accountNumber: string
+    accountNumber: string,
   ): AsyncIterable<ParsedPayloadResponse> {
     return this.dispatch<ParsedPayloadResponse>(
       "accountPositions",
-      accountNumber
+      accountNumber,
     ).iterable();
   }
 
   cancelAlert(alertId: number): Promise<ParsedPayloadResponse> {
     return this.dispatch<ParsedPayloadResponse>(
       "cancelAlert",
-      alertId
+      alertId,
     ).promise();
   }
 
   cancelOrder(orderId: number): Promise<ParsedPayloadResponse> {
     return this.dispatch<ParsedPayloadResponse>(
       "cancelOrder",
-      orderId
+      orderId,
     ).promise();
   }
 
@@ -153,11 +153,11 @@ export class WsJsonClientProxy implements WsJsonClient {
   }
 
   createAlert(
-    request: CreateAlertRequestParams
+    request: CreateAlertRequestParams,
   ): Promise<ParsedPayloadResponse> {
     return this.dispatch<ParsedPayloadResponse>(
       "createAlert",
-      request
+      request,
     ).promise();
   }
 
@@ -186,48 +186,48 @@ export class WsJsonClientProxy implements WsJsonClient {
   marketDepth(symbol: string): AsyncIterable<ParsedPayloadResponse> {
     return this.dispatch<ParsedPayloadResponse>(
       "marketDepth",
-      symbol
+      symbol,
     ).iterable();
   }
 
   optionChain(symbol: string): Promise<ParsedPayloadResponse> {
     return this.dispatch<ParsedPayloadResponse>(
       "optionChain",
-      symbol
+      symbol,
     ).promise();
   }
 
   optionChainDetails(
-    request: OptionChainDetailsRequest
+    request: OptionChainDetailsRequest,
   ): Promise<ParsedPayloadResponse> {
     return this.dispatch<ParsedPayloadResponse>(
       "optionChainDetails",
-      request
+      request,
     ).promise();
   }
 
   optionChainQuotes(symbol: string): AsyncIterable<ParsedPayloadResponse> {
     return this.dispatch<ParsedPayloadResponse>(
       "optionChainQuotes",
-      symbol
+      symbol,
     ).iterable();
   }
 
   optionQuotes(
-    request: OptionQuotesRequestParams
+    request: OptionQuotesRequestParams,
   ): AsyncIterable<ParsedPayloadResponse> {
     return this.dispatch<ParsedPayloadResponse>(
       "optionQuotes",
-      request
+      request,
     ).iterable();
   }
 
   placeOrder(
-    request: PlaceLimitOrderRequestParams
+    request: PlaceLimitOrderRequestParams,
   ): Promise<ParsedPayloadResponse> {
     return this.dispatch<ParsedPayloadResponse>(
       "placeOrder",
-      request
+      request,
     ).promise();
   }
 
@@ -236,18 +236,18 @@ export class WsJsonClientProxy implements WsJsonClient {
   }
 
   replaceOrder(
-    request: Required<PlaceLimitOrderRequestParams>
+    request: Required<PlaceLimitOrderRequestParams>,
   ): Promise<ParsedPayloadResponse> {
     return this.dispatch<ParsedPayloadResponse>(
       "replaceOrder",
-      request
+      request,
     ).promise();
   }
 
   searchInstruments(query: string): Promise<ParsedPayloadResponse> {
     return this.dispatch<ParsedPayloadResponse>(
       "searchInstruments",
-      query
+      query,
     ).promise();
   }
 
@@ -258,14 +258,14 @@ export class WsJsonClientProxy implements WsJsonClient {
   watchlist(watchlistId: number): Promise<ParsedPayloadResponse> {
     return this.dispatch<ParsedPayloadResponse>(
       "watchlist",
-      watchlistId
+      watchlistId,
     ).promise();
   }
 
   workingOrders(accountNumber: string): AsyncIterable<ParsedPayloadResponse> {
     return this.dispatch<ParsedPayloadResponse>(
       "workingOrders",
-      accountNumber
+      accountNumber,
     ).iterable();
   }
 

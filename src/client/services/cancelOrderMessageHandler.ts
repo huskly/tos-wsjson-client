@@ -13,9 +13,7 @@ export type CancelOrderResponse = {
   body: Record<string, any>;
 };
 
-export default class CancelOrderMessageHandler
-  implements WebSocketApiMessageHandler<number>
-{
+export default class CancelOrderMessageHandler implements WebSocketApiMessageHandler<number> {
   buildRequest(orderId: number): RawPayloadRequest {
     return newPayload({
       header: { service: "cancel_order", id: `cancel-${orderId}`, ver: 0 },

@@ -27,9 +27,7 @@ export type UserPropertiesResponse = {
   forexOrderQuantityIncrement: number;
 };
 
-export default class UserPropertiesMessageHandler
-  implements WebSocketApiMessageHandler<never>
-{
+export default class UserPropertiesMessageHandler implements WebSocketApiMessageHandler<never> {
   buildRequest(_: void): RawPayloadRequest {
     return newPayload({
       header: { service: "user_properties", id: "user_properties", ver: 0 },

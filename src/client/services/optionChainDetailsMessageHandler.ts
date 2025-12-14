@@ -30,9 +30,7 @@ export type OptionChainDetailsRequest = {
   seriesNames: string[];
 };
 
-export default class OptionChainDetailsMessageHandler
-  implements WebSocketApiMessageHandler<OptionChainDetailsRequest>
-{
+export default class OptionChainDetailsMessageHandler implements WebSocketApiMessageHandler<OptionChainDetailsRequest> {
   // param `seriesNames` as returned from `newOptionChainRequest`, eg: "16 JUN 23 100"
   buildRequest({
     symbol,

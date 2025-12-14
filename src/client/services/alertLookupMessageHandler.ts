@@ -7,9 +7,7 @@ export type RawAlertLookupResponse = {
   alerts: RawAlertResponse[];
 };
 
-export default class AlertLookupMessageHandler
-  implements WebSocketApiMessageHandler<never>
-{
+export default class AlertLookupMessageHandler implements WebSocketApiMessageHandler<never> {
   buildRequest(_: never): RawPayloadRequest {
     return {
       payload: [

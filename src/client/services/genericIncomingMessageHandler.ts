@@ -26,7 +26,7 @@ export default class GenericIncomingMessageHandler {
         const { newDocument } = applyPatch(
           existingObject,
           patches,
-          /* validateOperation */ false
+          /* validateOperation */ false,
         );
         this.dataStore[storeKey] = newDocument;
         parsed.push({ service, body: newDocument });

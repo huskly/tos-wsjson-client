@@ -69,9 +69,7 @@ export type OrderEventsSnapshotResponse = {
   service: "order_events";
 };
 
-export default class OrderEventsMessageHandler
-  implements WebSocketApiMessageHandler<never>
-{
+export default class OrderEventsMessageHandler implements WebSocketApiMessageHandler<never> {
   buildRequest(_: never): RawPayloadRequest {
     throw new Error("Should never be called, this message is inbound only");
   }

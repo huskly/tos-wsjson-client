@@ -127,9 +127,9 @@ export class RealWsJsonClient implements WsJsonClient {
           "Sec-WebSocket-Extensions":
             "permessage-deflate; client_max_window_bits",
         },
-      }
+      },
     ),
-    private readonly responseParser = new ResponseParser(this.genericHandler)
+    private readonly responseParser = new ResponseParser(this.genericHandler),
   ) {}
 
   get accessToken() {
@@ -154,7 +154,7 @@ export class RealWsJsonClient implements WsJsonClient {
   }
 
   async authenticateWithAuthCode(
-    authCode: string
+    authCode: string,
   ): Promise<RawLoginResponseBody | null> {
     ensure(authCode, "auth code is required");
     this.credentials = { authCode };
@@ -194,7 +194,7 @@ export class RealWsJsonClient implements WsJsonClient {
   private onMessage(
     data: string,
     resolve: (value: RawLoginResponseBody) => void,
-    reject: (reason?: string) => void
+    reject: (reason?: string) => void,
   ) {
     const { responseParser, buffer } = this;
     const message = JSON.parse(data) as WsJsonRawMessage;
@@ -225,7 +225,7 @@ export class RealWsJsonClient implements WsJsonClient {
       // exchange the auth code for an access token
       const handler = findByTypeOrThrow(
         messageHandlers,
-        SchwabLoginMessageHandler
+        SchwabLoginMessageHandler,
       );
       this.sendMessage(handler.buildRequest(authCode));
     } else {
@@ -254,11 +254,11 @@ export class RealWsJsonClient implements WsJsonClient {
   }
 
   accountPositions(
-    accountNumber: string
+    accountNumber: string,
   ): AsyncIterable<ParsedPayloadResponse> {
     return this.dispatchHandler(
       PositionsMessageHandler,
-      accountNumber
+      accountNumber,
     ).iterable();
   }
 
@@ -275,7 +275,7 @@ export class RealWsJsonClient implements WsJsonClient {
   lookupAlerts(): AsyncIterable<ParsedPayloadResponse> {
     return this.dispatchHandler(
       AlertLookupMessageHandler,
-      null as never
+      null as never,
     ).iterable();
   }
 
@@ -286,27 +286,27 @@ export class RealWsJsonClient implements WsJsonClient {
   optionChainQuotes(symbol: string): AsyncIterable<ParsedPayloadResponse> {
     return this.dispatchHandler(
       OptionSeriesQuotesMessageHandler,
-      symbol
+      symbol,
     ).iterable();
   }
 
   optionChainDetails(
-    request: OptionChainDetailsRequest
+    request: OptionChainDetailsRequest,
   ): Promise<ParsedPayloadResponse> {
     return this.dispatchHandler(
       OptionChainDetailsMessageHandler,
-      request
+      request,
     ).promise();
   }
 
   optionQuotes(
-    request: OptionQuotesRequestParams
+    request: OptionQuotesRequestParams,
   ): AsyncIterable<ParsedPayloadResponse> {
     return this.dispatchHandler(OptionQuotesMessageHandler, request).iterable();
   }
 
   async placeOrder(
-    request: PlaceLimitOrderRequestParams
+    request: PlaceLimitOrderRequestParams,
   ): Promise<ParsedPayloadResponse> {
     // 1. place order
     await this.dispatchHandler(PlaceOrderMessageHandler, request).promise();
@@ -316,7 +316,7 @@ export class RealWsJsonClient implements WsJsonClient {
   }
 
   replaceOrder(
-    request: Required<PlaceLimitOrderRequestParams>
+    request: Required<PlaceLimitOrderRequestParams>,
   ): Promise<ParsedPayloadResponse> {
     return this.dispatchHandler(SubmitOrderMessageHandler, request).promise();
   }
@@ -327,7 +327,7 @@ export class RealWsJsonClient implements WsJsonClient {
   }
 
   createAlert(
-    request: CreateAlertRequestParams
+    request: CreateAlertRequestParams,
   ): Promise<ParsedPayloadResponse> {
     return this.dispatchHandler(CreateAlertMessageHandler, request).promise();
   }
@@ -343,14 +343,14 @@ export class RealWsJsonClient implements WsJsonClient {
   watchlist(watchlistId: number): Promise<ParsedPayloadResponse> {
     return this.dispatchHandler(
       GetWatchlistMessageHandler,
-      watchlistId
+      watchlistId,
     ).promise();
   }
 
   userProperties(): Promise<ParsedPayloadResponse> {
     return this.dispatchHandler(
       UserPropertiesMessageHandler,
-      null as never
+      null as never,
     ).promise();
   }
 
@@ -360,12 +360,12 @@ export class RealWsJsonClient implements WsJsonClient {
 
   private dispatch<Req>(
     handler: WebSocketApiMessageHandler<Req>,
-    args: Req
+    args: Req,
   ): Observable<NonNullable<ParsedPayloadResponse>> {
     this.ensureConnected();
     this.sendMessage(handler.buildRequest(args));
     return deferredWrap(() => this.iterator).filter(
-      (msg) => msg.service === handler.service
+      (msg) => msg.service === handler.service,
     ) as Observable<NonNullable<ParsedPayloadResponse>>;
   }
 
@@ -379,11 +379,11 @@ export class RealWsJsonClient implements WsJsonClient {
   private handleSchwabLoginResponse(
     message: RawLoginResponse,
     resolve: (value: RawLoginResponseBody) => void,
-    reject: (reason?: string) => void
+    reject: (reason?: string) => void,
   ) {
     const handler = findByTypeOrThrow(
       messageHandlers,
-      SchwabLoginMessageHandler
+      SchwabLoginMessageHandler,
     );
     const loginResponse = handler.parseResponse(message as RawPayloadResponse);
     const [{ body }] = message.payload;
@@ -405,7 +405,7 @@ export class RealWsJsonClient implements WsJsonClient {
   private handleLoginResponse(
     message: RawLoginResponse,
     resolve: (value: RawLoginResponseBody) => void,
-    reject: (reason?: string) => void
+    reject: (reason?: string) => void,
   ) {
     const handler = findByTypeOrThrow(messageHandlers, LoginMessageHandler);
     const loginResponse = handler.parseResponse(message as RawPayloadResponse);
@@ -422,7 +422,7 @@ export class RealWsJsonClient implements WsJsonClient {
 
   private dispatchHandler<Req>(
     handlerCtor: Constructor<WebSocketApiMessageHandler<Req>>,
-    arg: Req
+    arg: Req,
   ): Observable<NonNullable<ParsedPayloadResponse>> {
     const handler = findByTypeOrThrow(messageHandlers, handlerCtor);
     return this.dispatch(handler, arg);

@@ -28,7 +28,7 @@ export class WsJsonServer {
   constructor(
     private readonly wsJsonClientFactory: () => WsJsonClient,
     private readonly server: DefaultHttpsServer | DefaultHttpServer,
-    private readonly port = DEFAULT_PORT
+    private readonly port = DEFAULT_PORT,
   ) {
     this.wss = new WebSocketServer({ server: this.server });
   }

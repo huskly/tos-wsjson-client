@@ -9,9 +9,7 @@ export type CreateAlertRequestParams = {
   operator: "GREATER_OR_EQUAL" | "LESS_OR_EQUAL";
 };
 
-export default class CreateAlertMessageHandler
-  implements WebSocketApiMessageHandler<CreateAlertRequestParams>
-{
+export default class CreateAlertMessageHandler implements WebSocketApiMessageHandler<CreateAlertRequestParams> {
   buildRequest({
     symbol,
     triggerPrice,
