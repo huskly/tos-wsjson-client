@@ -1,6 +1,6 @@
 {
   "name": "tos-wsjson-client",
-  "version": "0.11.0",
+  "version": "0.12.0",
   "description": "WebSocket client for the Thinkorswim wsjson websocket API",
   "main": "dist/web.bundle.js",
   "types": "dist/web.d.ts",
