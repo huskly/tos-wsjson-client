@@ -12,10 +12,10 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [23.x]
+        node-version: [23.x, 25.x]
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
       - name: Increase watchers
         run: echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
       - name: Use Node.js ${{ matrix.node-version }}
